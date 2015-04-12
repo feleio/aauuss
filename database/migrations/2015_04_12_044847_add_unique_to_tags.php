@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSourcesTable extends Migration {
+class AddUniqueToTags extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,9 @@ class CreateSourcesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sources', function(Blueprint $table)
+		Schema::table('tags', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->string('name',100);
-			$table->string('url',2083);
-			$table->timestamps();
+			$table->unique('name');
 		});
 	}
 
@@ -28,7 +25,10 @@ class CreateSourcesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sources');
+		Schema::table('tags', function(Blueprint $table)
+		{
+			$table->dropUniaue('name');
+		});
 	}
 
 }

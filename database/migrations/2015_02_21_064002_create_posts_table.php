@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->text('content');
-			$table->string('url',150);
+			$table->string('url',2083);
 			$table->string('author',50);
 			$table->integer('source_id');
 			$table->timestamp('posted_at');
