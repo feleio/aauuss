@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-class WelcomeController extends Controller {
+use App\Post;
+
+class NewsController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -30,7 +32,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('news');
+		$posts = Post::with('source')->orderBy("posted_at", "desc")->paginate(40);
+		return view('news', ["posts" => $posts]);
 	}
 
 }
