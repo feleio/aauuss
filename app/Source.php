@@ -9,4 +9,9 @@ class Source extends Model {
 		return $this->hasMany('App\Post');
 	}
 
+	public function tags()
+	{
+		return $this->belongsToMany('App\Tag');
+	}
+
 }

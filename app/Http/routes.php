@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'NewsController@index');
+Route::get('/', function(){
+    return Redirect::to('feed');
+});
+
+Route::get('feed', array('as' => 'feed.index', 'uses' => 'FeedController@index'));
 
 Route::get('home', 'HomeController@index');
 
@@ -19,3 +23,5 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('run', 'RunController@index' );

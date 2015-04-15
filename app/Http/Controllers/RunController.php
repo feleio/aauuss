@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
+use App\Source;
 
-class NewsController extends Controller {
+class RunController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -32,8 +34,17 @@ class NewsController extends Controller {
 	 */
 	public function index()
 	{
-		$posts = Post::with('source')->orderBy("posted_at", "desc")->paginate(40);
-		return view('news', ["posts" => $posts]);
+		$sources = Source::with('posts','tags')->get();
+		foreach($sources as $source)
+		{
+			foreach($source->posts as $post)
+			{
+				foreach($source->tags as $tag)
+				{
+					$post->tags()->attach($tag->id);
+				}
+			}
+		}
 	}
 
 }
