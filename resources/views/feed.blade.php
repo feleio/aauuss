@@ -85,13 +85,21 @@
 			      @foreach($posts as $post)
 			        <tr>
 			          <td class="col-md-2">
-			          	<strong>{{$post->source->name}}</strong>
+			          	<img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
+                  </img>
+                  <strong>{{$post->source->name}}</strong>
 			          </td>
 			          <td class="col-md-9">
 			          	<a href="{{$post->url}}" target="_blank">
 				          	<strong style="color:black">{{$post->title}}</strong>
 				          	<!-- <span style="color:grey"> - {{mb_substr($post->content, 0, 70-mb_strlen($post->title), "utf-8")}}</span> -->
-				          	<span style="color:grey"> - {{$post->content}}</span>
+                    <?php
+                      if( mb_strlen($post->content) > 200 )
+                        $content_str = mb_substr($post->content, 0, 200, 'utf-8')."...";
+                      else 
+                        $content_str = $post->content;
+                    ?>
+				          	<span style="color:grey"> - {{$content_str}}</span>
 			          	</a>
 		          		@foreach($post->tags as $tag)
 							<span class="label label-default">{{$tag->name}}</span>

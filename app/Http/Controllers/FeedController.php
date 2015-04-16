@@ -70,7 +70,7 @@ class FeedController extends Controller {
 		$cities = Tag::where('type', '=', 'city')->get();
 		$otherTags = Tag::where('type', '=', 'none')->get();
 
-		$posts = Post::with('source','tags');
+		$posts = Post::with('source','tags','source.scraper');
 
 		if(!$is_all_location)
 		{
@@ -93,7 +93,6 @@ class FeedController extends Controller {
 		else
 		{
 			$activeCityKey = array_search($location_tag_id, array_column($cities->lists('id','name'), 'id'));
-			$activeCityKey = 1;
 			$activeCity = $cities[$activeCityKey]->name;
 		}
 

@@ -14,4 +14,9 @@ class Source extends Model {
 		return $this->belongsToMany('App\Tag');
 	}
 
+    public function scraper()
+    {
+        return $this->belongsTo('App\Scraper');
+    }
+
 }
