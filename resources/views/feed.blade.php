@@ -22,7 +22,7 @@
               </button>
               <!-- <a class="navbar-brand" href="#">Brand</a> -->
               <span class="navbar-brand" style="color:white">
-                AAUUSS - 澳洲資訊收集器
+                AAUUSS - 澳洲資訊收集器 -
               </span>
             </div>
 
