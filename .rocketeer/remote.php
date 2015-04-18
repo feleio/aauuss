@@ -32,7 +32,8 @@ return array(
 	'shared'         => array(
 		'storage/logs',
 		'storage/framework/sessions',
-		'public/source_img'
+		'public/source_img',
+		'.env'
 	),
 
 	// Execution
