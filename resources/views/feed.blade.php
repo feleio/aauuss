@@ -4,10 +4,13 @@
 
 <html>
 	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link href="/css/app.css" rel="stylesheet">
         <style>
-        body { padding-top: 70px; }</style>
+          body { padding-top: 70px; }
+          .show-grid { margin-bottom: 15px; }
+        </style>
 	</head>
 	<body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -80,37 +83,49 @@
         </nav>
 		<div class="container">
 			<div class="content">
-				 <table class="table table-condensed">
-			      <tbody>
-			      @foreach($posts as $post)
-			        <tr>
-			          <td class="col-md-2">
-			          	<img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
-                  </img>
-                  <strong>{{$post->source->name}}</strong>
-			          </td>
-			          <td class="col-md-9">
-			          	<a href="{{$post->url}}" target="_blank">
-				          	<strong style="color:black">{{$post->title}}</strong>
-				          	<!-- <span style="color:grey"> - {{mb_substr($post->content, 0, 70-mb_strlen($post->title), "utf-8")}}</span> -->
-                    <?php
-                      if( mb_strlen($post->content) > 200 )
-                        $content_str = mb_substr($post->content, 0, 200, 'utf-8')."...";
-                      else 
-                        $content_str = $post->content;
-                    ?>
-				          	<span style="color:grey"> - {{$content_str}}</span>
-			          	</a>
-		          		@foreach($post->tags as $tag)
-							<span class="label label-default">{{$tag->name}}</span>
-		          		@endforeach
-			          </td>
-			          <?php $postAt = strtotime($post->posted_at) ?>
-			          <td class="col-md-1">{{time_elapsed_string($postAt)}}</td>
-			        </tr>
-			      @endforeach
-			      </tbody>
-			    </table>
+        <div class="container">
+  	      @foreach($posts as $post)
+  	        <div class="row show-grid">
+              <div class="col-xs-12 col-sm-2 col-md-2">
+  	          	<img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
+                </img>
+                <strong>{{$post->source->name}}</strong>
+  	          </div>
+              <div class="hidden-xs col-sm-8 col-md-9">
+  	          	<a href="{{$post->url}}" target="_blank">
+  		          	<strong style="color:black">{{$post->title}}</strong>
+                  <?php
+                    if( mb_strlen($post->content) > 200 )
+                      $content_str = mb_substr($post->content, 0, 200, 'utf-8')."...";
+                    else 
+                      $content_str = $post->content;
+                  ?>
+  		          	<span style="color:grey"> - {{$content_str}}</span>
+  	          	</a>
+            		@foreach($post->tags as $tag)
+  					<span class="label label-default">{{$tag->name}}</span>
+            		@endforeach
+  	          </div>
+              <div class="visible-xs col-xs-12 col-sm-8 col-md-9">
+                <a href="{{$post->url}}" target="_blank">
+                  <strong style="color:black">{{$post->title}}</strong>
+                  <?php
+                    if( mb_strlen($post->content) > 40 )
+                      $content_str = mb_substr($post->content, 0, 40, 'utf-8')."...";
+                    else 
+                      $content_str = $post->content;
+                  ?>
+                  <span style="color:grey"> - {{$content_str}}</span>
+                </a>
+                @foreach($post->tags as $tag)
+            <span class="label label-default">{{$tag->name}}</span>
+                @endforeach
+              </div>
+  	          <?php $postAt = strtotime($post->posted_at) ?>
+  	          <div class="col-xs-12 col-sm-2 col-md-1">{{time_elapsed_string($postAt)}}</div>
+  	        </div>
+  	      @endforeach
+        </div>
 			<?php 
         if($is_all_location)
           echo $posts->render();
