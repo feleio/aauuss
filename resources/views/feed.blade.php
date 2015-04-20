@@ -58,7 +58,7 @@
                   if(!$is_all_location)
                     $para['location'] = $location_tag_id;
                 ?>
-                <li <?php if($is_all_cata){ ?> class="active" <?php } ?>><a href="{{URL::route('feed.index', $para)}}">所有分類<span class="sr-only">(current)</span></a></li>
+               <!-- <li <?php if($is_all_cata){ ?> class="active" <?php } ?>><a href="{{URL::route('feed.index', $para)}}">所有分類<span class="sr-only">(current)</span></a></li>
                 @foreach($otherTags as $tag)
                   <li <?php if($tag->id == $cata_tag_id ){ ?> class="active" <?php } ?> >
                   <?php
@@ -70,7 +70,7 @@
                       {{$tag->name}}
                     </a>
                   </li>
-                @endforeach
+                @endforeach -->
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:window.location.reload();"><i class="fa fa-repeat fa-lg"></i> 重新整理</a></li>
@@ -111,7 +111,12 @@
 			      @endforeach
 			      </tbody>
 			    </table>
-			<?php echo $posts->render(); ?>
+			<?php 
+        if($is_all_location)
+          echo $posts->render();
+        else
+          echo $posts->appends(array('location'=>$location_tag_id))->render();
+      ?>
 			</div>
 		</div>    
     <!-- Scripts -->
