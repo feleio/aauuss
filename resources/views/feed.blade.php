@@ -86,12 +86,12 @@
         <div class="container">
   	      @foreach($posts as $post)
   	        <div class="row show-grid">
-              <div class="col-xs-12 col-sm-2 col-md-2">
+              <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
   	          	<img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
                 </img>
                 <strong>{{$post->source->name}}</strong>
   	          </div>
-              <div class="hidden-xs col-sm-8 col-md-9">
+              <div class="hidden-xs col-sm-8 col-md-9 col-lg-9">
   	          	<a href="{{$post->url}}" target="_blank">
   		          	<strong style="color:black">{{$post->title}}</strong>
                   <?php
@@ -106,7 +106,7 @@
   					<span class="label label-default">{{$tag->name}}</span>
             		@endforeach
   	          </div>
-              <div class="visible-xs col-xs-12 col-sm-8 col-md-9">
+              <div class="visible-xs col-xs-12 hidden-sm hidden-md hidden-lg">
                 <a href="{{$post->url}}" target="_blank">
                   <strong style="color:black">{{$post->title}}</strong>
                   <?php
@@ -118,11 +118,16 @@
                   <span style="color:grey"> - {{$content_str}}</span>
                 </a>
                 @foreach($post->tags as $tag)
-            <span class="label label-default">{{$tag->name}}</span>
+                  <span class="label label-default">{{$tag->name}}</span>
                 @endforeach
               </div>
+              <div class="visibl-xs col-xs-12 hidden-sm hidden-md hidden-lg">
+                <img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
+                </img>
+                <strong>{{$post->source->name}}</strong>
+              </div>
   	          <?php $postAt = strtotime($post->posted_at) ?>
-  	          <div class="col-xs-12 col-sm-2 col-md-1">{{time_elapsed_string($postAt)}}</div>
+  	          <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">{{time_elapsed_string($postAt)}}</div>
   	        </div>
   	      @endforeach
         </div>
