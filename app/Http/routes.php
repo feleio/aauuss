@@ -16,7 +16,7 @@ Route::get('/', function(){
 });
 
 Route::get('feed', array('as' => 'feed.index', 'uses' => 'FeedController@index'));
-
+/*
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
@@ -24,4 +24,4 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('run', 'RunController@index' );
+Route::get('run', 'RunController@index' );*/
