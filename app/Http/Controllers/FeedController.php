@@ -88,12 +88,18 @@ class FeedController extends Controller {
 
 		$posts = $posts->orderBy("posted_at", "desc")->paginate(40);
 
-		if($is_all_location)
-			$activeCity = "所有地區";
-		else
+
+		$activeCity = "所有地區";
+		if(!$is_all_location)
 		{
-			$activeCityKey = array_search($location_tag_id, array_column($cities->lists('id','name'), 'id'));
-			$activeCity = $cities[$activeCityKey]->name;
+			foreach( $cities as $city )
+			{
+				if ( $city->id == $location_tag_id )
+				{
+					$activeCity = $city->name;
+					break;
+				}
+			}
 		}
 
 		$queries =  \DB::getQueryLog();
