@@ -1,44 +1,6 @@
-<html>
-	<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AAUUSS - 澳洲資訊收集器</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link href="/css/app.css" rel="stylesheet">
-        <style>
-          body { padding-top: 70px; }
-          .show-grid { margin-bottom: 15px; }
-        </style>
-	</head>
-	<body>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+@extends('app')
 
-      ga('create', 'UA-56421171-2', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!-- <a class="navbar-brand" href="#">Brand</a> -->
-              <span class="navbar-brand" style="color:white">
-                AAUUSS - 澳洲資訊收集器
-              </span>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
+@section('nav_left')
                 <li class="dropdown active">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{$activeCity}}<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -81,78 +43,70 @@
                     </a>
                   </li>
                 @endforeach -->
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
+@endsection
+
+@section('nav_right')
                 <li><a href="#">資訊來源不斷增加中..</a></li>
                 <li><a href="#"><i class="fa fa-plus fa-lg"></i> 提供來源</a></li>
                 <li><a href="javascript:window.location.reload();"><i class="fa fa-repeat fa-lg"></i> 重新整理</a></li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-		<div class="container">
-			<div class="content">
-        <div class="container">
-  	      @foreach($posts as $post)
-  	        <div class="row show-grid">
-              <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
-  	          	<img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
-                </img>
-                <strong>{{$post->source->name}}</strong>
-  	          </div>
-              <div class="hidden-xs col-sm-8 col-md-9 col-lg-9">
-  	          	<a href="{{$post->url}}" target="_blank">
-  		          	<strong style="color:black">{{$post->title}}</strong>
-                  <?php
-                    if( mb_strlen($post->content) > 200 )
-                      $content_str = mb_substr($post->content, 0, 200, 'utf-8')."...";
-                    else 
-                      $content_str = $post->content;
-                  ?>
-  		          	<span style="color:grey"> - {{$content_str}}</span>
-  	          	</a>
-            		@foreach($post->tags as $tag)
-  					<span class="label label-default">{{$tag->name}}</span>
-            		@endforeach
-  	          </div>
-              <div class="visible-xs col-xs-12 hidden-sm hidden-md hidden-lg">
-                <a href="{{$post->url}}" target="_blank">
-                  <strong style="color:black">{{$post->title}}</strong>
-                  <?php
-                    if( mb_strlen($post->content) > 40 )
-                      $content_str = mb_substr($post->content, 0, 40, 'utf-8')."...";
-                    else 
-                      $content_str = $post->content;
-                  ?>
-                  <span style="color:grey"> - {{$content_str}}</span>
-                </a>
-                @foreach($post->tags as $tag)
-                  <span class="label label-default">{{$tag->name}}</span>
-                @endforeach
-              </div>
-              <div class="visibl-xs col-xs-12 hidden-sm hidden-md hidden-lg">
-                <img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
-                </img>
-                <strong>{{$post->source->name}}</strong>
-              </div>
-  	          <?php $postAt = strtotime($post->posted_at) ?>
-  	          <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">{{time_elapsed_string($postAt)}}</div>
-  	        </div>
-  	      @endforeach
-        </div>
-			<?php 
-        if($is_all_location)
-          echo $posts->render();
-        else
-          echo $posts->appends(array('location'=>$location_tag_id))->render();
-      ?>
-			</div>
-		</div>    
-    <!-- Scripts -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	</body>
-</html>
+@endsection
+
+@section('content')
+            <div class="container">
+              @foreach($posts as $post)
+                <div class="row show-grid">
+                  <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
+                    <img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
+                    </img>
+                    <strong>{{$post->source->name}}</strong>
+                  </div>
+                  <div class="hidden-xs col-sm-8 col-md-9 col-lg-9">
+                    <a href="{{$post->url}}" target="_blank">
+                      <strong style="color:black">{{$post->title}}</strong>
+                      <?php
+                        if( mb_strlen($post->content) > 200 )
+                          $content_str = mb_substr($post->content, 0, 200, 'utf-8')."...";
+                        else 
+                          $content_str = $post->content;
+                      ?>
+                      <span style="color:grey"> - {{$content_str}}</span>
+                    </a>
+                    @foreach($post->tags as $tag)
+                <span class="label label-default">{{$tag->name}}</span>
+                    @endforeach
+                  </div>
+                  <div class="visible-xs col-xs-12 hidden-sm hidden-md hidden-lg">
+                    <a href="{{$post->url}}" target="_blank">
+                      <strong style="color:black">{{$post->title}}</strong>
+                      <?php
+                        if( mb_strlen($post->content) > 40 )
+                          $content_str = mb_substr($post->content, 0, 40, 'utf-8')."...";
+                        else 
+                          $content_str = $post->content;
+                      ?>
+                      <span style="color:grey"> - {{$content_str}}</span>
+                    </a>
+                    @foreach($post->tags as $tag)
+                      <span class="label label-default">{{$tag->name}}</span>
+                    @endforeach
+                  </div>
+                  <div class="visibl-xs col-xs-12 hidden-sm hidden-md hidden-lg">
+                    <img src="{{asset('source_img/'.$post->source->scraper->id.'.png')}}" >
+                    </img>
+                    <strong>{{$post->source->name}}</strong>
+                  </div>
+                  <?php $postAt = strtotime($post->posted_at) ?>
+                  <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">{{time_elapsed_string($postAt)}}</div>
+                </div>
+              @endforeach
+            </div>
+            <?php 
+            if($is_all_location)
+              echo $posts->render();
+            else
+              echo $posts->appends(array('location'=>$location_tag_id))->render();
+            ?>
+
 
 <?php
 
@@ -184,3 +138,4 @@ function time_elapsed_string($ptime)
     }
 }
 ?>
+@endsection

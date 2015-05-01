@@ -16,12 +16,14 @@ Route::get('/', function(){
 });
 
 Route::get('feed', array('as' => 'feed.index', 'uses' => 'FeedController@index'));
-/*
-Route::get('home', 'HomeController@index');
+
+Route::get('back', 'AdminController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
+    'back' => 'AdminController',
 ]);
 
+/*
 Route::get('run', 'RunController@index' );*/
