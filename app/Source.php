@@ -19,4 +19,9 @@ class Source extends Model {
         return $this->belongsTo('App\Scraper');
     }
 
+    public function runs()
+    {
+        return $this->hasMany('App\Run');
+    }
+
 }
