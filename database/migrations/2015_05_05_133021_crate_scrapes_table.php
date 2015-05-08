@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRunsTable extends Migration {
+class CrateScrapesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,12 @@ class CreateRunsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('runs', function(Blueprint $table)
+		Schema::create('scrapes', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->enum('status',array('pending', 'success', 'fail'));
+			$table->integer('source_id');
+			$table->integer('run_id');
 			$table->timestamps();
 		});
 	}
@@ -26,7 +29,7 @@ class CreateRunsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('runs');
+		Schema::drop('scrapes');
 	}
 
 }

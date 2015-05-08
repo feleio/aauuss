@@ -4,9 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Log extends Model {
 
-	public function run()
+	public function scrape()
     {
-        return $this->belongsTo('App\run');
+        return $this->belongsTo('App\Scrape');
     }
 
 }

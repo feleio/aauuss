@@ -4,14 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Run extends Model {
 
-    public function logs()
+    public function scrapes()
     {
-        return $this->hasMany('App\Log');
-    }
-
-    public function source()
-    {
-        return $this->belongsTo('App\Source');
+        return $this->hasMany('App\Scrapes');
     }
 
 }

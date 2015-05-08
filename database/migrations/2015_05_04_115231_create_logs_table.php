@@ -16,7 +16,7 @@ class CreateLogsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->text('content');
-			$table->integer('run_id');
+			$table->integer('scrape_id');
 			$table->timestamps();
 		});
 	}
