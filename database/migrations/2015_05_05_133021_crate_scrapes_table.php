@@ -18,6 +18,7 @@ class CrateScrapesTable extends Migration {
 			$table->enum('status',array('pending', 'success', 'fail'));
 			$table->integer('source_id');
 			$table->integer('run_id');
+			$table->unique(array('source_id', 'run_id'));
 			$table->timestamps();
 		});
 	}
