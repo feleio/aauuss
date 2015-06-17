@@ -29,7 +29,9 @@ class AdminController extends Controller {
 
 	public function getStatus()
 	{
-		return view('admin.status');
+		$numOfRun = 5;
+		$runs = \Run::select('id')->take($numOfRun)->get();
+		return view('admin.status')->with('run_ids', $run_ids);
 	}
 
 }
